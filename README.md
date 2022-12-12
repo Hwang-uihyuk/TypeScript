@@ -77,7 +77,7 @@
          let a:null = null;
          let b:undefinded = undefinded;
          
-#### 3인터페이스
+#### 3.인터페이스
       let user:object;
       
       user ={
@@ -167,6 +167,37 @@
       console.log(b);
       b.start();  ==> "go.."
       
-      
+#### 4.함수
+     function hello(name?: string){
+          return `Hello, ${name || 'world'};
+     }
      
+     function hello2(name = "world"){
+     return `Hello, ${name}`;
+     }
+     
+     const result = hello();
+      //name이 option 이라 필요없을수도 있음.
+     const result2 = hello('Sam')
+     
+    //////////////////이쪽 위에/////// 
+     /////////////////이해 잘 안됨////////////////
+     
+     function add(...nums:numbers[]) {
+          return nums.reduce((result,num) => result + num , 0);
+          }
+          
+          //reduce first argument accumulate, second currentValue
+      add(1,2,3);
+      add(1,2,3,4,5,6,7,8);
       
+      
+      //객체
+      interface User {
+          name : string;
+          }
+          
+       const Sam : User = {name: 'Sam'}
+       
+       function showName(age :number, gender: 'm' | 'f') {
+          console.log(this.name, age, gender)
