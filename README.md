@@ -304,3 +304,101 @@ protected - 자식 클래스 접근 가능
 	다시 듣기..
 
 ```
+
+### 7 제네릭
+
+- 제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다.
+
+- 
+    
+    위처럼 generic을 쓰지 않는다면, 1) 타입을 미리 지정하거나 2) any를 이용하여 구현할 수 있다.
+    
+    1) 타입을 미리 지정하자면, 확실한 타입체크가 이뤄질 수 있겠지만 항상 number라는 타입을 받아야하므로 범용성이 떨어진다.
+    
+    2) 그렇다고 any를 사용한다면 자료의 타입을 제한할 수 없을 뿐더러, 이 function을 통해 어떤 타입의 데이터가 리턴되는지 알 수 없다.
+    
+
+```jsx
+function getSize(arr : number[] | string[] | boolean[] | object[]) : number {
+	return arr.length;
+}
+
+const arr1 = [1,2,3];
+getSize(arr1); // 3
+
+const arr2 = ['a','b','c'];
+getSize(arr2); //3
+
+const arr3 = [false,true,true]
+getSize(arr3); //3
+
+const arr4 = [{},{}, {name:"Tim"}]
+getSize(arr4); //3
+```
+
+이러한 방법을 
+
+제네릭을 사용하여서 
+
+```jsx
+function getSize<T>(arr:T[]):number{
+return arr.length;
+}
+const arr1 = [1,2,3];
+getSize<number>; // 3
+
+const arr2 = ['a','b','c'];
+getSize<string>; //3
+
+const arr3 = [false,true,true]
+getSize<boolean>; //3
+
+const arr4 = [{},{}, {name:"Tim"}]
+getSize<object>; //3
+```
+
+```jsx
+interface Mobile<T> {
+	name:string;
+	price:number;
+	option: T;
+}
+
+const m1:Mobile<{color: string; coupon: boolean}> = {
+	name:"s21",
+	price:1000,
+	option: {
+		color:"red",
+		coupon:false,
+	},
+};
+
+const m2:Mobile<string> = {
+	name:"s20",
+	price: 900,
+	option: "good",
+};
+
+```
+
+### 8 유틸리티 타입
+
+```jsx
+interface User{
+	id : number;
+	name: string;
+	age : number;
+	gender: "m" | "f";
+
+type UserKey = keyof User; // 'id' | 'name' | 'age'| ' gender'
+
+const uk:UserKey = 'age'
+
+Required<T>
+ReadOnly<T>
+Record<K,T> //Key, Type
+Pick<T,K>
+Omit<T,K>
+Exclude<T1,T2>
+NonNullable<Type>
+```
