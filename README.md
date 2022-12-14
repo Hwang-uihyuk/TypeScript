@@ -201,3 +201,106 @@
        
        function showName(age :number, gender: 'm' | 'f') {
           console.log(this.name, age, gender)
+
+
+### 5 리터럴, 유니온/교차 타입
+
+```jsx
+//Literal Types
+
+const userName1 = "Bob"  // userName1 은 string으로 받는다.
+let userName2 ="Tom" //userName2도 string
+
+userName2 = 3;   //이렇게 숫자로 받으면 오류가 나오는데
+// let userName2 : string | number = "Tom" 으로 바꿔주면 오류x
+
+type Job = "student" | "developer" | "engineer"
+//Job은 옆 세개밖에 못쓴다!
+
+interface User{
+	name : string;
+  job : Job;
+}
+
+//interface는 객체를 만들기전에 미리 적어줘야한다.
+
+const user:User = {
+	name : "Bob",
+	job : "student"	
+};
+
+interface HighSchoolStudent {
+	name : number | string //유니온타입
+	grade : 1 | 2 | 3;
+}
+
+interface Car{
+	name : "car"
+	color : string;
+	start(): void;
+}
+
+interface Mobile{
+	name : "mobile";
+	color : string;
+	call() : void;
+}
+
+function getGift(gift : Car | Mobile){
+	console.log(gift.color);
+
+	if ( gift.name === "car")
+		gift.start()
+	else 
+		gift.call()
+}
+
+//intersection Types
+
+interface Car{
+	name : string
+	start() : void;
+}
+
+interface Toy{
+	name : string;
+	color : string;
+	price : number;
+}
+
+const toyCar: Toy & Car = {
+	name : "타요",
+	start() {},
+	color : "blue",
+	price : 1000,
+};  //이런식으로 intersection을 해주면 모든 것을 다 적어주어야 한다.
+		// name, start, color, price
+
+```
+
+### 6 클래스
+
+```jsx
+class Car{
+	color : string;
+	//여기에 이렇게 꼭 적어줘야한다.
+
+	constructor(color : string){ //매개변수 타입도 string으로 적어줘야함
+		this.color = color;
+}
+start() {
+console.log('start');
+}
+}
+const bmw = new Car('red')
+
+//접근 제한자 - public private protected
+
+public - 자식 클래스, 클래스 인스턴스 모두 접근 가능
+private - 
+protected - 자식 클래스 접근 가능
+
+//추상 클래스
+	다시 듣기..
+
+```
