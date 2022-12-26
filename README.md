@@ -24,7 +24,7 @@
     }
     
     
-    #### 2.기본 타입 
+#### 2.기본 타입 
          let car:string = 'bmw';
          
          car = 'benz' (error x)
